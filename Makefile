@@ -3,7 +3,7 @@
 
 # If you can use docker without being root, you can do "make SUDO="
 SUDO=$(shell docker info >/dev/null 2>&1 || echo "sudo -E")
-BUILD_IN_CONTAINER=true
+BUILD_IN_CONTAINER=false
 RM=--rm
 RUN_FLAGS=-ti
 COVERAGE=
@@ -85,10 +85,10 @@ ifeq ($(ARCH),ppc64le)
 	ALPINE_BASEIMAGE?=ppc64le/alpine:3.6
 
 # ppc64le images have the -ppc64le suffix, for instance weaveworks/weave-ppc64le:latest
-	ARCH_EXT?=-ppc64le
+	ARCH_EXT?=
 
 # The name of the gcc binary
-	CC=powerpc64le-linux-gnu-gcc
+	CC=gcc
 
 # The architecture name to use when downloading a prebuilt QEMU binary
 	QEMUARCH=ppc64le
